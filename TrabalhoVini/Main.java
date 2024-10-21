@@ -2,10 +2,6 @@ package TrabalhoVini;
 
 import java.util.Scanner;
 
-/**
- * Classe principal que contém o menu do sistema de reservas.
- * Permite interagir com o usuário para realizar operações de reservas de hotel.
- */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

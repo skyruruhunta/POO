@@ -18,6 +18,10 @@ public class SistemaReservas {
     /**
      * Construtor para inicializar o sistema de reservas.
      * Inicializa as listas de hotéis e clientes.
+     * 
+     * @param hoteis Lista de hotéis a ser inicializada.
+     * @param clientes Lista de clientes a ser inicializada.
+     * @param scanner Scanner a ser utilizado para entrada de dados.
      */
     public SistemaReservas() {
         this.hoteis = new ArrayList<>();
@@ -26,29 +30,35 @@ public class SistemaReservas {
 
     /**
      * Adiciona um novo hotel ao sistema.
+     * Verifica se já existe um hotel com o mesmo nome antes de adicionar.
+     * Se já existir, exibe uma mensagem de erro.
      */
     public void adicionarHotel() {
         
         System.out.print("Nome do Hotel: ");
         String nome = scanner.nextLine();
 
-        // Verifica se já existe um hotel com esse nome
+        /**
+         * Verifica se já existe um hotel com o mesmo nome.
+         * Se já existir, exibe uma mensagem de erro e retorna.          
+         */
         if (buscarHotelPorNome(nome) != null) {
             System.out.println("Erro: Já existe um hotel com este nome.");            
             return;
         }
 
-        System.out.print("Endereço do Hotel: ");
-        String endereco = scanner.nextLine();
+            System.out.print("Endereço do Hotel: ");
+            String endereco = scanner.nextLine();
 
-        Hotel hotel = new Hotel(nome, endereco);
-        hoteis.add(hotel);
-        System.out.println("Hotel " + nome + " adicionado com sucesso.");
-
-        
+            Hotel hotel = new Hotel(nome, endereco);
+            hoteis.add(hotel);
+            System.out.println("Hotel " + nome + " adicionado com sucesso.");        
     }
 
-    // Método para listar todos os hotéis cadastrados
+    /**
+     * Lista todos os hotéis cadastrados no sistema.
+     * Se não houver hotéis cadastrados, exibe uma mensagem de erro.
+     */
     public void listarHoteis() {
         if (hoteis.isEmpty()) {
             System.out.println("Nenhum hotel cadastrado.");
@@ -60,81 +70,81 @@ public class SistemaReservas {
         }
     }
 
-    // Método para adicionar um quarto a um hotel
-    public void adicionarQuarto() {
-        
+    /**
+     * Adiciona um quarto a um hotel específico.
+     * Se o hotel não for encontrado, exibe uma mensagem de erro.
+     */
+    public void adicionarQuarto() {        
         
         System.out.print("Nome do Hotel: ");
         String nomeHotel = scanner.nextLine();
+
+        Hotel hotel = buscarHotelPorNome(nomeHotel);
+         if (hotel == null) {
+            System.out.println("Erro: Hotel não encontrado.");            
+            return;
+        }
+
+         try {
+            System.out.print("Número do Quarto: ");
+                int numero = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Tipo do Quarto: ");
+                String tipo = scanner.nextLine();
+
+            System.out.print("Preço do Quarto: ");
+                double preco = Double.parseDouble(scanner.nextLine());
+
+            Quarto quarto = new Quarto(numero, tipo, preco);
+                hotel.adicionarQuarto(quarto);
+                System.out.println("Quarto adicionado com sucesso.");
+        }   catch (NumberFormatException e) {
+                System.out.println("Erro: Entrada inválida para número ou preço.");
+        }
+        
+    }
+
+    /**
+     * Lista todos os quartos disponíveis em um hotel específico.
+     * Se o hotel não for encontrado, exibe uma mensagem de erro.
+     */
+    public void listarQuartosDisponiveis() {       
+        
+        System.out.print("Nome do Hotel: ");
+            String nomeHotel = scanner.nextLine();
 
         Hotel hotel = buscarHotelPorNome(nomeHotel);
         if (hotel == null) {
             System.out.println("Erro: Hotel não encontrado.");            
             return;
         }
-
-        try {
-            System.out.print("Número do Quarto: ");
-            int numero = Integer.parseInt(scanner.nextLine());
-
-            System.out.print("Tipo do Quarto: ");
-            String tipo = scanner.nextLine();
-
-            System.out.print("Preço do Quarto: ");
-            double preco = Double.parseDouble(scanner.nextLine());
-
-            Quarto quarto = new Quarto(numero, tipo, preco);
-            hotel.adicionarQuarto(quarto);
-            System.out.println("Quarto adicionado com sucesso.");
-        } catch (NumberFormatException e) {
-            System.out.println("Erro: Entrada inválida para número ou preço.");
-        }
-        
+         hotel.listarQuartosDisponiveis();        
     }
 
-    // Método para listar os quartos disponíveis em um hotel
-    public void listarQuartosDisponiveis() {
-       
-        
-        System.out.print("Nome do Hotel: ");
-        String nomeHotel = scanner.nextLine();
-
-        Hotel hotel = buscarHotelPorNome(nomeHotel);
-        if (hotel == null) {
-            System.out.println("Erro: Hotel não encontrado.");
-            
-            return;
-        }
-
-        hotel.listarQuartosDisponiveis();
-
-        
-    }
-
-    // Método para cadastrar clientes
-    public void cadastrarCliente() {
-        
+    /**
+     * Cadastra um novo cliente no sistema.
+     * Verifica se o cliente já está cadastrado antes de adicionar.
+     * Se o cliente já estiver cadastrado, exibe uma mensagem de erro.
+     */
+    public void cadastrarCliente() {        
         
         System.out.print("Nome do Cliente: ");
-        String nome = scanner.nextLine();
+            String nome = scanner.nextLine();
         
         if (buscarClientePorNome(nome) != null) {
-            System.out.println("Erro: Cliente já cadastrado.");
-           
+            System.out.println("Erro: Cliente já cadastrado.");           
             return;
         }
 
         System.out.print("Email do Cliente: ");
-        String email = scanner.nextLine();
+            String email = scanner.nextLine();
 
         System.out.print("Telefone do Cliente: ");
-        String telefone = scanner.nextLine();
+            String telefone = scanner.nextLine();
 
         Cliente cliente = new Cliente(nome, email, telefone);
-        clientes.add(cliente);
-        System.out.println("Cliente " + nome + " cadastrado com sucesso.");
-
-        
+            clientes.add(cliente);
+            System.out.println("Cliente " + nome + " cadastrado com sucesso.");        
     }
 
     /**
@@ -159,38 +169,36 @@ public class SistemaReservas {
                 clientes.add(cliente);
             }
 
-            System.out.print("Nome do Hotel: ");
-            String nomeHotel = scanner.nextLine();
-            Hotel hotel = buscarHotelPorNome(nomeHotel);
+                System.out.print("Nome do Hotel: ");
+                String nomeHotel = scanner.nextLine();
+                Hotel hotel = buscarHotelPorNome(nomeHotel);
 
             if (hotel == null) {
-                System.out.println("Hotel não encontrado.");
-                
+                System.out.println("Hotel não encontrado.");                
                 return;
             }
 
             hotel.listarQuartosDisponiveis();
-            System.out.print("Número do Quarto a reservar: ");
-            int numeroQuarto = scanner.nextInt();
-            scanner.nextLine();
+                System.out.print("Número do Quarto a reservar: ");
+                int numeroQuarto = scanner.nextInt();
+                scanner.nextLine();
 
-            Quarto quarto = buscarQuartoPorNumero(hotel, numeroQuarto);
+                Quarto quarto = buscarQuartoPorNumero(hotel, numeroQuarto);
             if (quarto == null || !quarto.isDisponivel()) {
-                System.out.println("Quarto não encontrado ou indisponível.");
-               
+                System.out.println("Quarto não encontrado ou indisponível.");               
                 return;
             }
 
-            System.out.print("Data de Check-in (dd/MM/yyyy): ");
-            String checkInStr = scanner.nextLine();
-            LocalDate checkIn = LocalDate.parse(checkInStr, formatter);
+                System.out.print("Data de Check-in (dd/MM/yyyy): ");
+                String checkInStr = scanner.nextLine();
+                LocalDate checkIn = LocalDate.parse(checkInStr, formatter);
 
-            System.out.print("Data de Check-out (dd/MM/yyyy): ");
-            String checkOutStr = scanner.nextLine();
-            LocalDate checkOut = LocalDate.parse(checkOutStr, formatter);
+                System.out.print("Data de Check-out (dd/MM/yyyy): ");
+                String checkOutStr = scanner.nextLine();
+                LocalDate checkOut = LocalDate.parse(checkOutStr, formatter);
 
-            Reserva reserva = new Reserva(cliente, quarto, checkIn, checkOut);
-            cliente.fazerReserva(reserva);
+                Reserva reserva = new Reserva(cliente, quarto, checkIn, checkOut);
+                cliente.fazerReserva(reserva);
         } catch (Exception e) {
             System.out.println("Erro: Entrada inválida. Por favor, tente novamente.");
         }
@@ -206,25 +214,23 @@ public class SistemaReservas {
         Cliente cliente = buscarClientePorNome(nomeCliente);
 
         if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            
+            System.out.println("Cliente não encontrado.");            
             return;
         }
 
-        cliente.listarReservas(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        System.out.print("Número do Quarto a cancelar: ");
-        int numeroQuarto = scanner.nextInt();
-        scanner.nextLine();
+            cliente.listarReservas(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            System.out.print("Número do Quarto a cancelar: ");
+            int numeroQuarto = scanner.nextInt();
+            scanner.nextLine();
 
         for (Reserva reserva : cliente.getReservas()) {
             if (reserva.getQuarto().getNumero() == numeroQuarto) {
                 cliente.cancelarReserva(reserva);
-                System.out.println("Reserva cancelada com sucesso.");
-                
+                System.out.println("Reserva cancelada com sucesso.");                
                 return;
             }
         }
-        System.out.println("Reserva não encontrada.");
+                System.out.println("Reserva não encontrada.");
         
     }
 
@@ -236,24 +242,17 @@ public class SistemaReservas {
             System.out.println("Nenhum cliente cadastrado.");
             return;
         }
-
         
         System.out.print("Nome do Cliente: ");
-        String nomeCliente = scanner.nextLine();
-        Cliente cliente = buscarClientePorNome(nomeCliente);
+            String nomeCliente = scanner.nextLine();
+            Cliente cliente = buscarClientePorNome(nomeCliente);
 
         if (cliente == null) {
-            System.out.println("Cliente não encontrado.");
-            
+            System.out.println("Cliente não encontrado.");            
             return;
         }
-
-        cliente.listarReservas(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-       
-    }
-
-    // Métodos auxiliares
+            cliente.listarReservas(DateTimeFormatter.ofPattern("dd/MM/yyyy"));       
+    }    
 
     /**
      * Busca um hotel pelo nome na lista de hotéis.
@@ -267,9 +266,8 @@ public class SistemaReservas {
                 return hotel;
             }
         }
-        return null;
+         return null;
     }
-
     
 
     /**
@@ -300,6 +298,6 @@ public class SistemaReservas {
                 return quarto;
             }
         }
-        return null;
+            return null;
     }
 }
