@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SistemaReservas sistema = new SistemaReservas();
+
+        SistemaReservas sistema = new SistemaReservas(scanner);
+
         int opcao = 0;
 
-        do {
+        do {            
             System.out.println("===== Menu Principal =====");
             System.out.println("1. Adicionar Novo Hotel");
             System.out.println("2. Listar Todos os Hotéis");
@@ -20,47 +22,44 @@ public class Main {
             System.out.println("8. Cadastrar Cliente");
             System.out.println("9. Sair");
             System.out.print("Escolha uma opção: ");
-            
-            try {
-                String entrada = scanner.nextLine(); 
-                opcao = Integer.parseInt(entrada);   
-            } catch (NumberFormatException e) {
-                System.out.println("Opção inválida. Por favor, insira um número.");
-                continue; 
-            }
 
-            
-            switch (opcao) {
-                case 1:
-                    sistema.adicionarHotel();
-                    break;
-                case 2:
-                    sistema.listarHoteis();
-                    break;
-                case 3:
-                    sistema.adicionarQuarto();
-                    break;
-                case 4:
-                    sistema.listarQuartosDisponiveis();
-                    break;
-                case 5:
-                    sistema.fazerReserva();
-                    break;
-                case 6:
-                    sistema.cancelarReserva();
-                    break;
-                case 7:
-                    sistema.listarReservasCliente();
-                    break;
-                case 8:
-                    sistema.cadastrarCliente();
-                    break;
-                case 9:
-                    System.out.println("Saindo do sistema...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-                    break;
+            try {
+                opcao = Integer.parseInt(scanner.nextLine());
+
+                switch (opcao) {
+                    case 1:
+                        sistema.adicionarHotel();
+                        break;
+                    case 2:
+                        sistema.listarHoteis();
+                        break;
+                    case 3:
+                        sistema.adicionarQuarto();
+                        break;
+                    case 4:
+                        sistema.listarQuartosDisponiveis();
+                        break;
+                    case 5:
+                        sistema.fazerReserva();
+                        break;
+                    case 6:
+                        sistema.cancelarReserva();
+                        break;
+                    case 7:
+                        sistema.listarReservasCliente();
+                        break;
+                    case 8:
+                        sistema.cadastrarCliente();
+                        break;
+                    case 9:
+                        System.out.println("Saindo do sistema...");
+                        break;
+                    default:
+                        System.out.println("Opção inválida. Tente novamente.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erro: Entrada inválida. Por favor, insira um número.");
             }
         } while (opcao != 9);
 

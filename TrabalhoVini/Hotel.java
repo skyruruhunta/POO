@@ -49,6 +49,7 @@ public class Hotel {
      */
     public void adicionarQuarto(Quarto quarto) {
         listaDeQuartos.add(quarto);
+
         System.out.println("Quarto adicionado com sucesso!");
     }
 
@@ -58,6 +59,7 @@ public class Hotel {
      */
     public void listarQuartosDisponiveis() {
         System.out.println("Quartos disponíveis no hotel " + nome + ":");
+
         for (Quarto quarto : listaDeQuartos) {
             if (quarto.isDisponivel()) {
                 System.out.println(quarto);

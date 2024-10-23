@@ -9,7 +9,9 @@ import java.util.List;
  */
 public class Cliente {
     private String nome;
+    @SuppressWarnings("unused")
     private String email;
+    @SuppressWarnings("unused")
     private String telefone;
     private List<Reserva> reservas;
 

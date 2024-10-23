@@ -6,7 +6,7 @@ package TrabalhoVini;
  */
 public class Quarto {
     private int numero;
-    private String tipo;
+    private TipoQuarto tipo;
     private double preco;
     private boolean estaDisponivel;
 
@@ -14,14 +14,14 @@ public class Quarto {
      * Constrói um quarto com o número, tipo e preço especificados.
      *
      * @param numero O número do quarto.
-     * @param tipo O tipo do quarto (por exemplo, simples, duplo, suíte).
+     * @param tipo O tipo do quarto.
      * @param preco O preço por noite do quarto.
      */
-    public Quarto(int numero, String tipo, double preco) {
+    public Quarto(int numero, TipoQuarto tipo, double preco) {
         this.numero = numero;
         this.tipo = tipo;
         this.preco = preco;
-        this.estaDisponivel = true;  // Por padrão, o quarto é criado como disponível.
+        this.estaDisponivel = true;
     }
 
     /**
@@ -31,6 +31,15 @@ public class Quarto {
      */
     public int getNumero() {
         return numero;
+    }
+
+    /**
+     * Retorna o tipo do quarto.
+     *
+     * @return O tipo do quarto.
+     */
+    public TipoQuarto getTipo() {
+        return tipo;
     }
 
     /**
@@ -48,6 +57,7 @@ public class Quarto {
     public void reservar() {
         if (estaDisponivel) {
             estaDisponivel = false;
+
             System.out.println("Quarto " + numero + " reservado com sucesso!");
         } else {
             System.out.println("Quarto já está reservado.");
@@ -59,6 +69,7 @@ public class Quarto {
      */
     public void liberar() {
         estaDisponivel = true;
+
         System.out.println("Quarto " + numero + " liberado.");
     }
 
