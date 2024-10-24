@@ -16,23 +16,21 @@ public class Reserva {
     private LocalDate dataCheckOut;
 
     /**
-     * Constrói uma reserva com o cliente, quarto, data de check-in e check-out especificados.
-     * Assegura que a data de check-out seja posterior à data de check-in.
+     * Constrói uma reserva com o cliente, quarto e datas de check-in e check-out especificados.
      *
      * @param cliente O cliente que fez a reserva.
      * @param quarto O quarto reservado.
-     * @param dataCheckIn A data de check-in.
-     * @param dataCheckOut A data de check-out.
+     * @param dataCheckIn A data de check-in da reserva.
+     * @param dataCheckOut A data de check-out da reserva.
      */
     public Reserva(Cliente cliente, Quarto quarto, LocalDate dataCheckIn, LocalDate dataCheckOut) {
-
         if (dataCheckOut.isBefore(dataCheckIn)) {
-            throw new IllegalArgumentException("A data de check-out não pode ser anterior à de check-in.");
-        } 
-        else if (dataCheckIn.isAfter(dataCheckOut)) {
-            throw new IllegalArgumentException("A data de check-in não pode ser posterior à de check-out.");
-        }
+            throw new IllegalArgumentException("A data de check-out não pode ser anterior a de check-in.");
 
+        } else if (dataCheckIn.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("A data de check-in não pode ser anterior a data atual.");
+        }
+         
         this.id = ++contador;
         this.cliente = cliente;
         this.quarto = quarto;
@@ -40,29 +38,20 @@ public class Reserva {
         this.dataCheckOut = dataCheckOut;
     }
 
-    /**
-     * Retorna o ID da reserva.
-     *
-     * @return O ID da reserva.
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * Retorna o quarto associado à reserva.
-     *
-     * @return O quarto reservado.
-     */
     public Quarto getQuarto() {
         return quarto;
     }
 
     /**
-     * Confirma a reserva, marcando o quarto como reservado.
+     * Retorna a data de check-in da reserva.
+     *
+     * @return A data de check-in da reserva.
      */
     public void confirmarReserva() {
-
         if (quarto.isDisponivel()) {
             quarto.reservar();
             System.out.println("Reserva " + id + " confirmada para o cliente " + cliente.getNome());
@@ -76,20 +65,17 @@ public class Reserva {
      */
     public void cancelarReserva() {
         quarto.liberar();
-
         System.out.println("Reserva " + id + " cancelada.");
     }
 
     /**
-     * Retorna a representação textual da reserva, incluindo o cliente, o quarto, 
-     * e o período da reserva (check-in e check-out).
+     * Retorna uma representação em String da reserva.
      *
-     * @return A representação textual da reserva.
+     * @return Uma representação em String da reserva.
      */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         String checkInFormatado = dataCheckIn.format(formatter);
         String checkOutFormatado = dataCheckOut.format(formatter);
 

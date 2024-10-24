@@ -11,7 +11,7 @@ public enum TipoQuarto {
     /**
      * Retorna uma representação textual do tipo de quarto.
      *
-     * @return Uma string representando o tipo de quarto.
+     * @return Uma string com o nome do tipo de quarto.
      */
     @Override
     public String toString() {
@@ -19,7 +19,7 @@ public enum TipoQuarto {
             case SIMPLES: return "Simples";
             case DUPLO: return "Duplo";
             case SUITE: return "Suíte";
-            default: throw new IllegalArgumentException("Tipo de quarto inválido.");
+            default: throw new IllegalArgumentException("Tipo de quarto inválido." );
         }
     }
 }

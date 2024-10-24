@@ -34,9 +34,9 @@ public class Hotel {
     }
 
     /**
-     * Retorna a lista de quartos do hotel.
+     * Retorna o endereço do hotel.
      *
-     * @return A lista de quartos disponíveis no hotel.
+     * @return O endereço do hotel.
      */
     public List<Quarto> getListaDeQuartos() {
         return listaDeQuartos;
@@ -48,18 +48,17 @@ public class Hotel {
      * @param quarto O quarto a ser adicionado.
      */
     public void adicionarQuarto(Quarto quarto) {
-        listaDeQuartos.add(quarto);
-
-        System.out.println("Quarto adicionado com sucesso!");
+        listaDeQuartos.add(quarto);       
     }
 
     /**
-     * Lista todos os quartos disponíveis no hotel.
-     * Somente os quartos que não estão reservados serão exibidos.
+     * Remove um quarto da lista de quartos do hotel.
+     *
+     * @param numero O número do quarto a ser removido.
      */
     public void listarQuartosDisponiveis() {
         System.out.println("Quartos disponíveis no hotel " + nome + ":");
-
+        
         for (Quarto quarto : listaDeQuartos) {
             if (quarto.isDisponivel()) {
                 System.out.println(quarto);
@@ -68,9 +67,9 @@ public class Hotel {
     }
 
     /**
-     * Retorna a representação em String do hotel, exibindo o nome e o endereço.
+     * Retorna uma representação em String do hotel.
      *
-     * @return A representação textual do hotel.
+     * @return Uma representação em String do hotel.
      */
     @Override
     public String toString() {

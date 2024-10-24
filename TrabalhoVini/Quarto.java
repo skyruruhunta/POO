@@ -21,43 +21,28 @@ public class Quarto {
         this.numero = numero;
         this.tipo = tipo;
         this.preco = preco;
-        this.estaDisponivel = true;
+        this.estaDisponivel = true;  // Por padrão, o quarto é criado como disponível.
     }
-
-    /**
-     * Retorna o número do quarto.
-     *
-     * @return O número do quarto.
-     */
+   
     public int getNumero() {
         return numero;
     }
-
-    /**
-     * Retorna o tipo do quarto.
-     *
-     * @return O tipo do quarto.
-     */
+   
     public TipoQuarto getTipo() {
         return tipo;
     }
-
-    /**
-     * Verifica se o quarto está disponível para reserva.
-     *
-     * @return true se o quarto estiver disponível, false caso contrário.
-     */
+    
     public boolean isDisponivel() {
         return estaDisponivel;
     }
 
     /**
-     * Reserva o quarto, tornando-o indisponível.
+     * Reserva o quarto, se ele estiver disponível.
      */
     public void reservar() {
         if (estaDisponivel) {
             estaDisponivel = false;
-
+            
             System.out.println("Quarto " + numero + " reservado com sucesso!");
         } else {
             System.out.println("Quarto já está reservado.");
@@ -65,18 +50,17 @@ public class Quarto {
     }
 
     /**
-     * Libera o quarto, tornando-o disponível novamente.
+     * Libera o quarto, tornando-o disponível.
      */
     public void liberar() {
         estaDisponivel = true;
-
         System.out.println("Quarto " + numero + " liberado.");
     }
 
     /**
-     * Retorna uma representação textual do quarto, incluindo o número, tipo e preço.
+     * Retorna uma representação em String do quarto.
      *
-     * @return A representação textual do quarto.
+     * @return Uma representação em String do quarto.
      */
     @Override
     public String toString() {
