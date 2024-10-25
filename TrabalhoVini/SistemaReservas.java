@@ -26,6 +26,12 @@ public class SistemaReservas {
         this.scanner = scanner;
     }
     
+
+    /**
+     * Retorna a lista de hoteis do sistema.
+     *
+     * @return A lista de hoteis.
+     */
     public List<Hotel> getHoteis() {
         return hoteis;
     }
@@ -113,6 +119,7 @@ public class SistemaReservas {
     public void listarHoteis() {
         if (hoteis.isEmpty()) {
             System.out.println("Nenhum hotel cadastrado.");
+
         } else {
             System.out.println("Lista de hotéis:");
             for (Hotel hotel : hoteis) {
@@ -190,6 +197,7 @@ public class SistemaReservas {
     public void cancelarReserva() {
         System.out.print("Nome do Cliente: ");
         String nomeCliente = scanner.nextLine();
+
         Cliente cliente = buscarClientePorNome(nomeCliente);
 
         if (cliente == null) {
@@ -198,6 +206,7 @@ public class SistemaReservas {
         }
 
         cliente.listarReservas(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
         System.out.print("Número do Quarto a cancelar: ");
         int numeroQuarto = Integer.parseInt(scanner.nextLine());
 

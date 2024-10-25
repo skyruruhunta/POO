@@ -21,9 +21,9 @@ public class Quarto {
         this.numero = numero;
         this.tipo = tipo;
         this.preco = preco;
-        this.estaDisponivel = true;  // Por padrão, o quarto é criado como disponível.
-    }
-   
+        this.estaDisponivel = true;
+    } 
+
     public int getNumero() {
         return numero;
     }
@@ -35,7 +35,7 @@ public class Quarto {
     public boolean isDisponivel() {
         return estaDisponivel;
     }
-
+ 
     /**
      * Reserva o quarto, se ele estiver disponível.
      */

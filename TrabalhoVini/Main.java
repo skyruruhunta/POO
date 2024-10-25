@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
         SistemaReservas sistema = new SistemaReservas(scanner);
+
         Administrador admin = new Administrador("Admin", 1);
         int opcao = 0;
 

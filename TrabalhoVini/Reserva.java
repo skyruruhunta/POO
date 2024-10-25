@@ -37,7 +37,7 @@ public class Reserva {
         this.dataCheckIn = dataCheckIn;
         this.dataCheckOut = dataCheckOut;
     }
-
+    
     public int getId() {
         return id;
     }

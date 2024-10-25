@@ -21,6 +21,24 @@ public class Administrador {
         this.id = id;
     }
 
+       /**
+     * Retorna o nome do administrador.
+     *
+     * @return O nome do administrador.
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * Retorna o ID do administrador.
+     *
+     * @return O ID do administrador.
+     */
+    public int getId() {
+        return id;
+    }
+
     /**
      * Adiciona um novo hotel ao sistema.
      *
@@ -85,23 +103,5 @@ public class Administrador {
             }
         }
         return null;
-    }
-      
-    /**
-     * Retorna o nome do administrador.
-     *
-     * @return O nome do administrador.
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * Retorna o ID do administrador.
-     *
-     * @return O ID do administrador.
-     */
-    public int getId() {
-        return id;
-    }
+    }     
 }

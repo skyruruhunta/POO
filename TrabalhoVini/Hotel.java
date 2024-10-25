@@ -34,9 +34,9 @@ public class Hotel {
     }
 
     /**
-     * Retorna o endereço do hotel.
+     *retorna a lista de quartos do hotel.
      *
-     * @return O endereço do hotel.
+     * @return A lista de quartos do hotel.
      */
     public List<Quarto> getListaDeQuartos() {
         return listaDeQuartos;
@@ -52,9 +52,9 @@ public class Hotel {
     }
 
     /**
-     * Remove um quarto da lista de quartos do hotel.
+     * lista todos os quartos do hotel.
      *
-     * @param numero O número do quarto a ser removido.
+     * @param numero O número do quarto a ser listado.
      */
     public void listarQuartosDisponiveis() {
         System.out.println("Quartos disponíveis no hotel " + nome + ":");
